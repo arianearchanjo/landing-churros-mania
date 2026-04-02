@@ -175,10 +175,10 @@ function enviarPedido() {
   });
 
   msg += `*TOTAL DOS PRODUTOS:* R$ ${soma},00\n`;
-  msg += `*(O valor do frete sera calculado abaixo)*\n\n`;
+  msg += `*(O valor do frete será calculado abaixo)*\n\n`;
 
-  msg += `*ENDERECO DE ENTREGA:* \n`;
-  msg += `${endereco || 'Nao informado (combinar no chat)'}\n\n`;
+  msg += `*ENDEREÇO DE ENTREGA:* \n`;
+  msg += `${endereco || 'Não informado (combinar no chat)'}\n\n`;
 
   msg += `Pode confirmar a disponibilidade e o valor do frete?`;
 
