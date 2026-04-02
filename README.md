@@ -4,7 +4,7 @@ Site institucional e de pedidos online para a **Churros Mania**, uma confeitaria
 
 ## 🔗 Deploy
 
-> **Live:** [churrosmania.netlify.app](https://churrosmania.netlify.app/) *(atualize com o link real após o deploy)*
+> **Live:** [churrosmania.netlify.app](https://churrosmania.netlify.app/) 
 
 ---
 
