@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churros Mania — Delivery de Churros Artesanais</title>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       CARRINHO FLUTUANTE
+  ============================================================ -->
+  <div class="cart-fab" id="cartFab" onclick="toggleCart()" title="Ver pedido">
+    <i class="bi bi-bag-fill"></i>
+    <span class="cart-fab__count" id="cartCount">0</span>
+  </div>
+
+  <!-- Painel do carrinho -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-panel__header">
+      <h3 class="cart-panel__title"><i class="bi bi-bag-fill"></i> Meu Pedido</h3>
+      <button class="cart-panel__close" onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="cart-panel__body" id="cartBody">
+      <p class="cart-empty" id="cartEmpty">Nenhum item adicionado ainda.</p>
+      <ul class="cart-list" id="cartList"></ul>
+    </div>
+    <div class="cart-panel__footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Total estimado (sem frete):</span>
+        <strong id="cartTotal">R$ 0</strong>
+      </div>
+      <div class="cart-frete-aviso">
+        <i class="bi bi-info-circle-fill"></i>
+        Frete não incluso. O valor será informado após envio do endereço no WhatsApp.
+      </div>
+      <div class="cart-endereco">
+        <label class="cart-endereco__label" for="inputEndereco">
+          <i class="bi bi-geo-alt-fill"></i> Endereço de entrega <span class="cart-endereco__opt">(opcional)</span>
+        </label>
+        <textarea
+          id="inputEndereco"
+          class="cart-endereco__input"
+          rows="2"
+          placeholder="Ex: Rua das Flores, 123 — Bairro Centro"></textarea>
+      </div>
+      <button class="btn btn--primary btn--full" onclick="enviarPedido()">
+        <i class="bi bi-whatsapp"></i> Enviar pedido pelo WhatsApp
+      </button>
+      <button class="btn btn--ghost-sm" onclick="limparCarrinho()">
+        <i class="bi bi-trash3"></i> Limpar pedido
+      </button>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="header" id="inicio">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">
+        <img src="logo.jpg" alt="Churros Mania" class="logo__img" />
+      </a>
+
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="#inicio"     class="nav__link">Início</a></li>
+          <li><a href="#cardapio"   class="nav__link">Cardápio</a></li>
+          <li><a href="#como-pedir" class="nav__link">Como Pedir</a></li>
+          <li><a href="#horario"    class="nav__link">Horário</a></li>
+          <li><a href="#contato"    class="nav__link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn btn--wpp-header" onclick="toggleCart()">
+        <i class="bi bi-bag-fill"></i> Ver Pedido
+        <span class="header-cart-count" id="headerCartCount" style="display:none">0</span>
+      </button>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero__bg-dots"></div>
+    <div class="container hero__inner">
+
+      <div class="hero__copy">
+        <p class="hero__eyebrow">
+          <i class="bi bi-bicycle"></i> Somente Delivery &nbsp;•&nbsp; <i class="bi bi-heart-fill"></i> Massa artesanal
+        </p>
+        <h1 class="hero__title">
+          Churros<br>
+          <em>fresquinhos</em><br>
+          na sua porta!
+        </h1>
+        <p class="hero__desc">
+          Recheados generosamente, crocantes e entregues quentinhos na sua porta. Monte seu pedido e receba em casa!
+        </p>
+        <div class="hero__btns">
+          <a href="#cardapio" class="btn btn--primary btn--lg" onclick="abrirCardapio()">
+            <i class="bi bi-list-ul"></i> Ver Cardápio
+          </a>
+          <button class="btn btn--ghost btn--lg" onclick="toggleCart()">
+            <i class="bi bi-bag-fill"></i> Meu Pedido
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__logo-ring">
+          <img src="logo.jpg" alt="Churros Mania" class="hero__logo-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__wave">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,35 C360,70 1080,0 1440,35 L1440,70 L0,70 Z" fill="#fff8ee"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CARDÁPIO
+  ============================================================ -->
+  <section class="section" id="cardapio">
+    <div class="container">
+
+      <div class="section__head">
+        <h2 class="section__title">Nosso Cardápio</h2>
+        <p class="section__sub">Adicione quantos quiser e envie tudo de uma vez pelo WhatsApp</p>
+        <button class="btn btn--primary btn--ver-cardapio" id="btnVerCardapio" onclick="toggleCardapio()">
+          <i class="bi bi-list-ul" id="btnVerCardapioIcon"></i> <span id="btnVerCardapioTxt">Ver Cardápio</span>
+        </button>
+      </div>
+      <div id="cardapioConteudo" class="cardapio-oculto">
+
+      <div class="frete-aviso reveal">
+        <i class="bi bi-truck"></i>
+        <div>
+          <strong>Frete não incluso nos preços.</strong>
+          O valor do frete será calculado após o envio do seu endereço no WhatsApp.
+        </div>
+      </div>
+
+      <!-- Confeitos -->
+      <div class="confeitos reveal">
+        <div class="confeitos__icon"><i class="bi bi-magic"></i></div>
+        <h3 class="confeitos__title">Confeitos Opcionais</h3>
+        <p class="confeitos__sub">Disponíveis para Tradicionais, Gourmet e Gourmet Especial — sem custo adicional</p>
+        <div class="confeitos__list">
+          <span class="cpill"><i class="bi bi-dot"></i> Granulado</span>
+          <span class="cpill"><i class="bi bi-dot"></i> Amendoim</span>
+          <span class="cpill"><i class="bi bi-dot"></i> Chocoball</span>
+          <span class="cpill"><i class="bi bi-dot"></i> Confete</span>
+          <span class="cpill"><i class="bi bi-dot"></i> Coco Ralado</span>
+        </div>
+      </div>
+
+      <!-- Tradicionais -->
+      <div class="category reveal">
+        <div class="cat-header">
+          <span class="cat-tag cat-tag--laranja">
+            <i class="bi bi-star-fill"></i> Tradicionais
+          </span>
+          <span class="cat-preco">R$ 10,00</span>
+        </div>
+        <div class="cards-grid">
+
+          <article class="card" data-nome="Churros Tradicional — Doce de Leite" data-preco="10">
+            <div class="card__info">
+              <h4 class="card__name">Doce de Leite</h4>
+              <p class="card__desc">Churro crocante recheado com doce de leite cremoso.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 10</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+          <article class="card" data-nome="Churros Tradicional — Chocolate" data-preco="10">
+            <div class="card__info">
+              <h4 class="card__name">Chocolate</h4>
+              <p class="card__desc">Recheado com chocolate ao leite suave e cremoso.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 10</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Gourmet -->
+      <div class="category reveal">
+        <div class="cat-header">
+          <span class="cat-tag cat-tag--marrom">
+            <i class="bi bi-award-fill"></i> Gourmet
+          </span>
+          <span class="cat-preco">R$ 12,00</span>
+        </div>
+        <div class="cards-grid">
+
+          <article class="card" data-nome="Churros Gourmet — Doce de Leite" data-preco="12">
+            <div class="card__info">
+              <h4 class="card__name">Doce de Leite</h4>
+              <p class="card__desc">Versão gourmet com recheio reforçado e acabamento especial.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 12</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+          <article class="card" data-nome="Churros Gourmet — Chocolate" data-preco="12">
+            <div class="card__info">
+              <h4 class="card__name">Chocolate</h4>
+              <p class="card__desc">Recheio cremoso de chocolate com cobertura crocante.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 12</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+          <article class="card card--destaque" data-nome="Churros Gourmet — Misto" data-preco="12">
+            <div class="card__badge"><i class="bi bi-heart-fill"></i> Favorito</div>
+            <div class="card__info">
+              <h4 class="card__name">Misto</h4>
+              <p class="card__desc">Doce de leite por dentro, cobertura generosa de chocolate por fora.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 12</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Gourmet Especial -->
+      <div class="category reveal">
+        <div class="cat-header">
+          <span class="cat-tag cat-tag--laranja">
+            <i class="bi bi-gem"></i> Gourmet Especial
+          </span>
+          <span class="cat-preco">R$ 14,00</span>
+        </div>
+        <div class="cards-grid">
+
+          <article class="card" data-nome="Churros Gourmet Especial — Nutella" data-preco="14">
+            <div class="card__info">
+              <h4 class="card__name">Nutella</h4>
+              <p class="card__desc">Recheado generosamente com Nutella original.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 14</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+          <article class="card" data-nome="Churros Gourmet Especial — Paçoquinha" data-preco="14">
+            <div class="card__info">
+              <h4 class="card__name">Paçoquinha</h4>
+              <p class="card__desc">Recheio de paçoca cremosa com toque especial de amendoim.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 14</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+          <article class="card card--destaque" data-nome="Churros Gourmet Especial — Duo" data-preco="14">
+            <div class="card__badge"><i class="bi bi-lightning-fill"></i> Especial</div>
+            <div class="card__info">
+              <h4 class="card__name">Duo</h4>
+              <p class="card__desc">Nutella por dentro, cobertura de leitinho condensado por fora.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price">R$ 14</span>
+              <button class="btn btn--pedir" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="category reveal">
+        <div class="cat-header">
+          <span class="cat-tag cat-tag--premium">
+            <i class="bi bi-trophy-fill"></i> Gourmet Premium
+          </span>
+          <span class="cat-preco cat-preco--gold">R$ 16,00</span>
+        </div>
+        <div class="cards-grid cards-grid--2">
+
+          <article class="card card--premium" data-nome="Churros Premium — Sabor Charge" data-preco="16" data-sem-confeito="true">
+            <div class="card__badge card__badge--gold"><i class="bi bi-trophy-fill"></i> Premium</div>
+            <div class="card__info">
+              <h4 class="card__name">Sabor Charge</h4>
+              <p class="card__desc">Inspirado no bombom Charge — chocolate com amendoim crocante.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price card__price--gold">R$ 16</span>
+              <button class="btn btn--pedir btn--pedir-gold" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+          <article class="card card--premium" data-nome="Churros Premium — Sabor Prestígio" data-preco="16" data-sem-confeito="true">
+            <div class="card__badge card__badge--gold"><i class="bi bi-trophy-fill"></i> Premium</div>
+            <div class="card__info">
+              <h4 class="card__name">Sabor Prestígio</h4>
+              <p class="card__desc">Inspirado no Prestígio — chocolate intenso com creme de coco.</p>
+            </div>
+            <div class="card__footer">
+              <span class="card__price card__price--gold">R$ 16</span>
+              <button class="btn btn--pedir btn--pedir-gold" onclick="adicionarAoCarrinho(this)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      </div><!-- /cardapioConteudo -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMO PEDIR
+  ============================================================ -->
+  <section class="section section--steps" id="como-pedir">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">Como Pedir</h2>
+        <p class="section__sub">Simples, rápido e sem complicação</p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step reveal">
+          <div class="step__icon-wrap">
+            <i class="bi bi-search step__icon"></i>
+          </div>
+          <div class="step__num">1</div>
+          <h4 class="step__title">Escolha os sabores</h4>
+          <p class="step__desc">Navegue pelo cardápio e clique em <strong>Adicionar</strong> nos churros que quiser.</p>
+        </div>
+
+        <div class="step__connector">
+          <div class="step__connector-line"></div>
+          <i class="bi bi-chevron-right step__connector-icon"></i>
+        </div>
+
+        <div class="step reveal">
+          <div class="step__icon-wrap">
+            <i class="bi bi-bag-fill step__icon"></i>
+          </div>
+          <div class="step__num">2</div>
+          <h4 class="step__title">Revise o pedido</h4>
+          <p class="step__desc">Clique no ícone de sacola para ver os itens, ajustar quantidades e conferir o total.</p>
+        </div>
+
+        <div class="step__connector">
+          <div class="step__connector-line"></div>
+          <i class="bi bi-chevron-right step__connector-icon"></i>
+        </div>
+
+        <div class="step reveal">
+          <div class="step__icon-wrap">
+            <i class="bi bi-whatsapp step__icon"></i>
+          </div>
+          <div class="step__num">3</div>
+          <h4 class="step__title">Envie pelo WhatsApp</h4>
+          <p class="step__desc">Toque em <strong>Enviar pedido</strong>, informe seu endereço e a gente confirma disponibilidade e calcula o frete na hora.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HORÁRIO
+  ============================================================ -->
+  <section class="section" id="horario">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">Horário de Atendimento</h2>
+        <p class="section__sub">Somente por delivery</p>
+      </div>
+      <div class="horarios">
+
+        <div class="horario-card reveal">
+          <div class="horario-card__icon-wrap">
+            <i class="bi bi-calendar-week-fill horario-card__icon"></i>
+          </div>
+          <div class="horario-card__day">Terça a Sexta</div>
+          <div class="horario-card__time">18:00 — 22:00</div>
+        </div>
+
+        <div class="horario-card reveal">
+          <div class="horario-card__icon-wrap">
+            <i class="bi bi-calendar-heart-fill horario-card__icon"></i>
+          </div>
+          <div class="horario-card__day">Sábados</div>
+          <div class="horario-card__time">16:00 — 22:00</div>
+        </div>
+
+      </div>
+      <p class="horario__note horario__local reveal">
+        <i class="bi bi-geo-alt-fill"></i>
+        Jardim Paulista, Campina Grande do Sul — PR
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTATO / CTA
+  ============================================================ -->
+  <section class="section section--cta" id="contato">
+    <div class="container cta__box reveal">
+      <img src="logo.jpg" alt="Churros Mania" class="cta__logo" />
+      <h2 class="cta__title">Bora pedir?!</h2>
+      <p class="cta__sub">Monte seu pedido pelo cardápio ou fale direto com a gente!</p>
+      <p class="cta__local"><i class="bi bi-geo-alt-fill"></i> Jardim Paulista — Campina Grande do Sul (PR)</p>
+      <div class="cta__btns">
+        <a href="#cardapio" class="btn btn--primary btn--xl" onclick="abrirCardapio()">
+          <i class="bi bi-list-ul"></i> Ver Cardápio
+        </a>
+        <a href="https://wa.me/554184241052?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido%20de%20churros."
+           class="btn btn--wpp-cta btn--xl" target="_blank" rel="noopener">
+          <i class="bi bi-whatsapp"></i> Chamar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="footer__brand">
+        <i class="bi bi-shop"></i> Churros Mania
+      </span>
+      <span class="footer__pill">
+        <i class="bi bi-bicycle"></i> Somente Delivery
+      </span>
+      <span class="footer__copy">© 2026 Churros Mania. Todos os direitos reservados.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

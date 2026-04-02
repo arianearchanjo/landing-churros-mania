@@ -1,0 +1,1508 @@
+/* =============================================
+   CHURROS MANIA — style.css v3
+   Adições: carrinho lateral, seção Como Pedir
+   redesenhada, Bootstrap Icons integrados.
+   ============================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --amarelo:       #ffe79f;
+  --amarelo-light: #fff8ee;
+  --laranja:       #d97704;
+  --laranja-hover: #b86004;
+  --laranja-light: #fef3c7;
+  --marrom:        #6f3718;
+  --marrom-med:    #8b4513;
+  --marrom-light:  #a0522d;
+  --branco:        #ffffff;
+  --cinza-bg:      #f9f4ec;
+  --gold:          #c8860a;
+  --sombra:        0 4px 20px rgba(111,55,24,.11);
+  --sombra-card:   0 6px 28px rgba(111,55,24,.13);
+  --sombra-hover:  0 10px 36px rgba(111,55,24,.22);
+  --r:             16px;
+  --r-pill:        999px;
+  --t:             .24s ease;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--amarelo-light);
+  color: var(--marrom);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* =============================================
+   BOTÕES
+   ============================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-family: 'Fredoka One', cursive;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--r-pill);
+  transition: background var(--t), transform var(--t), box-shadow var(--t);
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.btn--primary {
+  background: var(--laranja);
+  color: var(--branco);
+  padding: .8rem 1.8rem;
+  box-shadow: 0 4px 18px rgba(217,119,4,.32);
+}
+.btn--primary:hover {
+  background: var(--laranja-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px rgba(217,119,4,.42);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--marrom);
+  padding: .8rem 1.8rem;
+  border: 2.5px solid var(--marrom);
+}
+.btn--ghost:hover {
+  background: var(--marrom);
+  color: var(--branco);
+  transform: translateY(-3px);
+}
+
+.btn--ghost-sm {
+  background: transparent;
+  color: var(--marrom-light);
+  padding: .5rem 1rem;
+  border: 1.5px solid rgba(111,55,24,.25);
+  font-size: .85rem;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: 'Fredoka One', cursive;
+  transition: background var(--t), color var(--t);
+}
+.btn--ghost-sm:hover {
+  background: rgba(111,55,24,.07);
+}
+
+.btn--full { width: 100%; justify-content: center; }
+
+.btn--lg  { padding: .95rem 2.2rem; font-size: 1.05rem; }
+.btn--xl  { padding: 1.1rem 2.6rem; font-size: 1.15rem; }
+
+.btn--wpp-header {
+  background: var(--laranja);
+  color: var(--branco);
+  padding: .55rem 1.2rem;
+  font-size: .9rem;
+  box-shadow: 0 3px 12px rgba(217,119,4,.28);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: 'Fredoka One', cursive;
+  border-radius: var(--r-pill);
+  transition: background var(--t), transform var(--t);
+  position: relative;
+}
+.btn--wpp-header:hover {
+  background: var(--laranja-hover);
+  transform: translateY(-2px);
+}
+
+.header-cart-count {
+  background: var(--marrom);
+  color: var(--branco);
+  border-radius: 50%;
+  font-size: .72rem;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fredoka One', cursive;
+  padding: 0 4px;
+}
+
+.btn--pedir {
+  background: var(--laranja);
+  color: var(--branco);
+  padding: .45rem 1rem;
+  font-size: .85rem;
+  box-shadow: 0 2px 8px rgba(217,119,4,.26);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: 'Fredoka One', cursive;
+  border-radius: var(--r-pill);
+  transition: background var(--t), transform var(--t), box-shadow var(--t);
+}
+.btn--pedir:hover {
+  background: var(--laranja-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(217,119,4,.38);
+}
+.btn--pedir.added {
+  background: #16a34a;
+  box-shadow: 0 3px 10px rgba(22,163,74,.3);
+}
+
+.btn--pedir-gold {
+  background: linear-gradient(135deg, #c8860a, #e6a020);
+  color: var(--branco);
+  box-shadow: 0 2px 10px rgba(200,134,10,.32);
+  border: none;
+  cursor: pointer;
+  padding: .45rem 1rem;
+  font-size: .85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: 'Fredoka One', cursive;
+  border-radius: var(--r-pill);
+  transition: all var(--t);
+}
+.btn--pedir-gold:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+.btn--pedir-gold.added {
+  background: #16a34a;
+}
+
+.btn--wpp-cta {
+  background: #25d366;
+  color: var(--branco);
+  padding: 1.1rem 2.6rem;
+  font-size: 1.15rem;
+  font-family: 'Fredoka One', cursive;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  box-shadow: 0 4px 18px rgba(37,211,102,.35);
+  transition: filter var(--t), transform var(--t);
+}
+.btn--wpp-cta:hover {
+  filter: brightness(1.07);
+  transform: translateY(-3px);
+}
+
+/* =============================================
+   CARRINHO — FAB
+   ============================================= */
+.cart-fab {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 200;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--laranja);
+  color: var(--branco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(217,119,4,.45);
+  transition: transform var(--t), background var(--t), box-shadow var(--t);
+  border: none;
+}
+.cart-fab:hover {
+  transform: scale(1.1);
+  background: var(--laranja-hover);
+  box-shadow: 0 10px 32px rgba(217,119,4,.55);
+}
+.cart-fab__count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--marrom);
+  color: var(--branco);
+  border-radius: 50%;
+  font-size: .72rem;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fredoka One', cursive;
+  border: 2px solid var(--branco);
+  transition: transform .2s;
+}
+.cart-fab__count.bump { animation: bump .3s ease; }
+
+/* =============================================
+   CARRINHO — PAINEL LATERAL
+   ============================================= */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 210;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 680px;
+  max-width: 95vw;
+  background: var(--branco);
+  z-index: 220;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 40px rgba(0,0,0,.15);
+  transform: translateX(110%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  border-left: 3px solid rgba(217,119,4,.2);
+}
+.cart-panel.open { transform: translateX(0); }
+
+.cart-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 2rem;
+  border-bottom: 2px solid rgba(217,119,4,.15);
+  background: var(--amarelo-light);
+  flex-shrink: 0;
+}
+.cart-panel__title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: var(--marrom);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.cart-panel__close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--marrom-light);
+  cursor: pointer;
+  padding: .3rem;
+  border-radius: 50%;
+  transition: background var(--t), color var(--t);
+  display: flex;
+}
+.cart-panel__close:hover {
+  background: rgba(111,55,24,.08);
+  color: var(--marrom);
+}
+
+.cart-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 2rem;
+}
+
+.cart-empty {
+  text-align: center;
+  color: var(--marrom-light);
+  font-size: .95rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+/* Lista de itens */
+.cart-list { display: flex; flex-direction: column; gap: .75rem; }
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .85rem 1rem;
+  background: var(--amarelo-light);
+  border-radius: 12px;
+  border: 1.5px solid rgba(217,119,4,.15);
+}
+.cart-item__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--laranja);
+  color: var(--branco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  flex-shrink: 0;
+}
+.cart-item__info { flex: 1; min-width: 0; }
+.cart-item__name {
+  font-family: 'Fredoka One', cursive;
+  font-size: .92rem;
+  color: var(--marrom);
+  line-height: 1.25;
+  word-break: break-word;
+}
+.cart-item__price {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--laranja);
+  margin-top: .1rem;
+}
+
+/* Controles de quantidade */
+.cart-item__qty {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  flex-shrink: 0;
+}
+.qty-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(217,119,4,.4);
+  background: var(--branco);
+  color: var(--laranja);
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--t), color var(--t);
+  line-height: 1;
+  font-family: 'Fredoka One', cursive;
+}
+.qty-btn:hover {
+  background: var(--laranja);
+  color: var(--branco);
+  border-color: var(--laranja);
+}
+.qty-num {
+  font-family: 'Fredoka One', cursive;
+  font-size: .95rem;
+  color: var(--marrom);
+  min-width: 16px;
+  text-align: center;
+}
+
+.cart-panel__footer {
+  padding: 1.4rem 2rem;
+  border-top: 2px solid rgba(217,119,4,.15);
+  background: var(--amarelo-light);
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--marrom);
+  padding: .6rem .9rem;
+  background: var(--branco);
+  border-radius: 10px;
+  border: 1.5px solid rgba(217,119,4,.18);
+}
+.cart-total strong {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  color: var(--laranja);
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,248,238,.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid rgba(217,119,4,.16);
+  transition: box-shadow var(--t);
+}
+.header.scrolled { box-shadow: 0 3px 20px rgba(111,55,24,.14); }
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 70px;
+}
+
+.logo { flex-shrink: 0; }
+.logo__img {
+  height: 52px;
+  width: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 10px rgba(217,119,4,.28);
+  border: 2.5px solid var(--laranja);
+  transition: transform var(--t);
+}
+.logo__img:hover { transform: scale(1.06) rotate(-3deg); }
+
+.nav { margin-left: auto; }
+.nav__list { display: flex; gap: .15rem; }
+.nav__link {
+  display: block;
+  padding: .45rem .9rem;
+  font-family: 'Fredoka One', cursive;
+  font-size: .95rem;
+  color: var(--marrom-light);
+  border-radius: var(--r-pill);
+  transition: color var(--t), background var(--t);
+}
+.nav__link:hover,
+.nav__link.active {
+  color: var(--laranja);
+  background: rgba(217,119,4,.09);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  background: var(--marrom);
+  border-radius: 4px;
+  transition: transform var(--t), opacity var(--t);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero {
+  position: relative;
+  background: var(--amarelo);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero__bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(217,119,4,.12) 2px, transparent 2px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  position: relative;
+  z-index: 1;
+}
+.hero__copy { animation: fadeUp .7s ease both; }
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: 'Fredoka One', cursive;
+  font-size: .9rem;
+  color: var(--laranja);
+  background: rgba(217,119,4,.11);
+  border: 1.5px solid rgba(217,119,4,.28);
+  border-radius: var(--r-pill);
+  padding: .3rem 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.hero__title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  line-height: 1.1;
+  color: var(--marrom);
+  margin-bottom: 1.1rem;
+}
+.hero__title em {
+  font-style: normal;
+  color: var(--laranja);
+}
+
+.hero__desc {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--marrom-light);
+  max-width: 420px;
+  margin-bottom: 2rem;
+}
+
+.hero__btns { display: flex; gap: .9rem; flex-wrap: wrap; }
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn .9s ease .2s both;
+}
+.hero__logo-ring {
+  border-radius: 50%;
+  padding: 12px;
+  background: var(--laranja);
+  box-shadow:
+    0 0 0 8px rgba(255,255,255,.8),
+    0 0 0 16px rgba(217,119,4,.22),
+    0 16px 60px rgba(217,119,4,.38);
+  animation: wobble 6s ease-in-out infinite;
+}
+.hero__logo-img {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--branco);
+}
+
+.hero__wave {
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  line-height: 0;
+}
+.hero__wave svg { width: 100%; height: 70px; display: block; }
+
+/* =============================================
+   SEÇÃO GENÉRICA
+   ============================================= */
+.section { padding: 5rem 0; }
+
+.section__head { text-align: center; margin-bottom: 3rem; }
+.section__title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  color: var(--marrom);
+  margin-bottom: .4rem;
+}
+.section__sub {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--marrom-light);
+}
+
+/* =============================================
+   CARDÁPIO
+   ============================================= */
+.category { margin-bottom: 3rem; }
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: .75rem;
+  border-bottom: 2.5px dashed rgba(217,119,4,.22);
+}
+.cat-tag {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: .35rem 1.2rem;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+.cat-tag--laranja { background: var(--laranja); color: var(--branco); }
+.cat-tag--marrom  { background: var(--marrom); color: var(--branco); }
+.cat-tag--premium { background: linear-gradient(135deg, #c8860a, #e6a020); color: var(--branco); }
+
+.cat-preco {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.05rem;
+  color: var(--laranja);
+}
+.cat-preco--gold { color: var(--gold); }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 1.2rem;
+}
+.cards-grid--2 {
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+}
+
+.card {
+  background: var(--branco);
+  border-radius: var(--r);
+  padding: 1.4rem;
+  box-shadow: var(--sombra-card);
+  border: 2px solid rgba(217,119,4,.1);
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  position: relative;
+  transition: transform var(--t), box-shadow var(--t);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sombra-hover);
+}
+.card--destaque {
+  border-color: rgba(217,119,4,.32);
+  background: linear-gradient(145deg, #fff 70%, #fff5e0 100%);
+}
+.card--premium {
+  border-color: rgba(200,134,10,.38);
+  background: linear-gradient(145deg, #fff 60%, #fef3c7 100%);
+}
+
+.card__badge {
+  position: absolute;
+  top: -11px;
+  right: 14px;
+  font-family: 'Fredoka One', cursive;
+  font-size: .75rem;
+  background: var(--laranja);
+  color: var(--branco);
+  padding: .2rem .75rem;
+  border-radius: var(--r-pill);
+  box-shadow: 0 2px 8px rgba(217,119,4,.28);
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.card__badge--gold {
+  background: linear-gradient(135deg, #c8860a, #e6a020);
+}
+
+/* Ícone do card */
+.card__icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(217,119,4,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.card__icon {
+  font-size: 1.4rem;
+  color: var(--laranja);
+}
+.card__icon--gold { color: var(--gold); }
+
+.card__info { flex-grow: 1; }
+.card__name {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.12rem;
+  color: var(--marrom);
+  margin-bottom: .25rem;
+}
+.card__desc {
+  font-size: .87rem;
+  font-weight: 500;
+  color: var(--marrom-light);
+  line-height: 1.55;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: .4rem;
+  padding-top: .7rem;
+  border-top: 1.5px solid rgba(217,119,4,.12);
+}
+.card__price {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.15rem;
+  color: var(--laranja);
+}
+.card__price--gold { color: var(--gold); }
+
+/* =============================================
+   CONFEITOS
+   ============================================= */
+.confeitos {
+  background: var(--branco);
+  border-radius: var(--r);
+  padding: .85rem 1.25rem;
+  box-shadow: var(--sombra);
+  border: 2px dashed rgba(217,119,4,.28);
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem .75rem;
+  margin-bottom: 2rem;
+}
+.confeitos__icon {
+  font-size: 1.1rem;
+  color: var(--laranja);
+}
+.confeitos__title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  color: var(--marrom);
+}
+.confeitos__sub {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--marrom-light);
+  width: 100%;
+  margin-top: -.2rem;
+  margin-bottom: .3rem;
+}
+.confeitos__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  justify-content: center;
+}
+.cpill {
+  font-family: 'Fredoka One', cursive;
+  font-size: .8rem;
+  background: rgba(217,119,4,.1);
+  color: var(--marrom);
+  border: 1.5px solid rgba(217,119,4,.2);
+  padding: .22rem .75rem;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: .1rem;
+  transition: background var(--t), transform var(--t);
+  cursor: default;
+}
+.cpill:hover { background: rgba(217,119,4,.2); transform: scale(1.04); }
+
+/* =============================================
+   COMO PEDIR — REDESENHADO
+   ============================================= */
+.section--steps {
+  background: var(--cinza-bg);
+  border-top: 2px solid rgba(217,119,4,.12);
+  border-bottom: 2px solid rgba(217,119,4,.12);
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+.step {
+  background: var(--branco);
+  border-radius: 20px;
+  padding: 2.2rem 1.8rem 1.8rem;
+  text-align: center;
+  flex: 1;
+  max-width: 280px;
+  min-width: 0;
+  box-shadow: var(--sombra-card);
+  border: 2px solid rgba(217,119,4,.12);
+  position: relative;
+  transition: transform var(--t), box-shadow var(--t);
+}
+.step:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-hover);
+}
+
+/* Ícone grande no topo do card */
+.step__icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(217,119,4,.1);
+  border: 2.5px solid rgba(217,119,4,.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  transition: background var(--t), border-color var(--t);
+}
+.step:hover .step__icon-wrap {
+  background: var(--laranja);
+  border-color: var(--laranja);
+}
+.step__icon {
+  font-size: 1.7rem;
+  color: var(--laranja);
+  transition: color var(--t);
+}
+.step:hover .step__icon { color: var(--branco); }
+
+/* Número de passo — bolinha sobre a borda do card */
+.step__num {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--laranja);
+  color: var(--branco);
+  font-family: 'Fredoka One', cursive;
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(217,119,4,.4);
+  border: 2px solid var(--branco);
+}
+
+.step__title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  color: var(--marrom);
+  margin-bottom: .5rem;
+}
+.step__desc {
+  font-size: .87rem;
+  font-weight: 600;
+  color: var(--marrom-light);
+  line-height: 1.6;
+}
+.step__desc strong { color: var(--laranja); }
+
+/* Conector entre os steps */
+.step__connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 60px;
+  gap: .3rem;
+  margin-top: -1rem; /* alinha com o centro do card */
+}
+.step__connector-line {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(217,119,4,.2), rgba(217,119,4,.6), rgba(217,119,4,.2));
+}
+.step__connector-icon {
+  font-size: 1.4rem;
+  color: var(--laranja);
+  opacity: .7;
+}
+
+/* =============================================
+   HORÁRIO
+   ============================================= */
+.horarios {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.horario-card {
+  background: var(--branco);
+  border-radius: var(--r);
+  padding: 2rem 3rem;
+  text-align: center;
+  box-shadow: var(--sombra-card);
+  border: 2px solid rgba(217,119,4,.13);
+  flex: 1 1 220px;
+  max-width: 300px;
+  transition: transform var(--t), box-shadow var(--t);
+}
+.horario-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+}
+.horario-card__icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(217,119,4,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto .85rem;
+}
+.horario-card__icon {
+  font-size: 1.5rem;
+  color: var(--laranja);
+}
+.horario-card__day {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  color: var(--marrom);
+  margin-bottom: .35rem;
+}
+.horario-card__time {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.7rem;
+  color: var(--laranja);
+}
+
+.horario__note {
+  text-align: center;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--marrom-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+}
+
+/* =============================================
+   CONTATO / CTA
+   ============================================= */
+.section--cta { background: var(--amarelo); }
+.cta__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+.cta__logo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--laranja);
+  box-shadow: 0 6px 28px rgba(217,119,4,.38);
+  animation: wobble 6s ease-in-out infinite;
+}
+.cta__title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.4rem;
+  color: var(--marrom);
+}
+.cta__sub {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--marrom-light);
+  max-width: 400px;
+}
+.cta__btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: .5rem;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  background: var(--marrom);
+  padding: 1.5rem 0;
+}
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.footer__brand {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.15rem;
+  color: var(--branco);
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+.footer__pill {
+  font-family: 'Fredoka One', cursive;
+  font-size: .82rem;
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.1);
+  padding: .25rem .9rem;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+.footer__copy {
+  font-size: .8rem;
+  color: rgba(255,255,255,.42);
+}
+
+/* =============================================
+   REVEAL
+   ============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
+   KEYFRAMES
+   ============================================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes wobble {
+  0%,100% { transform: rotate(-2deg) scale(1); }
+  50%     { transform: rotate(2deg) scale(1.02); }
+}
+@keyframes bump {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* =============================================
+   RESPONSIVO
+   ============================================= */
+@media (max-width: 860px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-bottom: 4rem;
+  }
+  .hero__desc { max-width: 100%; }
+  .hero__btns { justify-content: center; }
+  .hero__visual { order: -1; }
+  .hero__logo-img { width: 200px; height: 200px; }
+  .btn--wpp-header { display: none; }
+
+  /* Steps em coluna no mobile */
+  .steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .step { max-width: 340px; width: 100%; }
+  .step__connector {
+    flex-direction: row;
+    width: auto;
+    height: 50px;
+    gap: .4rem;
+    margin-top: 0;
+  }
+  .step__connector-line {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(217,119,4,.2), rgba(217,119,4,.6), rgba(217,119,4,.2));
+  }
+  .step__connector-icon { transform: rotate(90deg); }
+}
+
+@media (max-width: 700px) {
+  .hamburger { display: flex; }
+  .nav {
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: rgba(255,248,238,.97);
+    border-bottom: 2px solid rgba(217,119,4,.16);
+    padding: 1rem 1.5rem 1.5rem;
+    transform: translateY(-110%);
+    opacity: 0;
+    transition: transform .3s ease, opacity .3s ease;
+    z-index: 99;
+    margin-left: 0;
+  }
+  .nav.open { transform: translateY(0); opacity: 1; }
+  .nav__list { flex-direction: column; gap: .4rem; }
+  .nav__link { font-size: 1.1rem; padding: .65rem 1rem; }
+  .footer__inner { flex-direction: column; align-items: center; text-align: center; }
+  .cta__btns { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 480px) {
+  .cards-grid,
+  .cards-grid--2 { grid-template-columns: 1fr; }
+  .horarios { flex-direction: column; align-items: center; }
+  .horario-card { padding: 1.5rem 2rem; max-width: 100%; }
+  .hero { min-height: 80vh; }
+  .cart-panel { width: 100%; }
+}
+/* =============================================
+   AVISO DE FRETE — Cardápio
+   ============================================= */
+.frete-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  background: var(--laranja-light);
+  border: 1.5px solid #f6c87a;
+  border-radius: var(--r);
+  padding: .85rem 1.1rem;
+  margin-bottom: .75rem;
+  color: var(--marrom-med);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.frete-aviso i {
+  font-size: 1.25rem;
+  color: var(--laranja);
+  flex-shrink: 0;
+  margin-top: .1rem;
+}
+.frete-aviso strong {
+  display: block;
+  color: var(--marrom);
+  margin-bottom: .1rem;
+}
+
+/* =============================================
+   AVISO DE FRETE — Painel do Carrinho
+   ============================================= */
+.cart-frete-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  background: #fef9ec;
+  border: 1.5px solid #f6c87a;
+  border-radius: 10px;
+  padding: .65rem .85rem;
+  font-size: .8rem;
+  color: var(--marrom-med);
+  line-height: 1.45;
+  margin-bottom: .75rem;
+}
+.cart-frete-aviso i {
+  font-size: 1rem;
+  color: var(--laranja);
+  flex-shrink: 0;
+  margin-top: .05rem;
+}
+
+/* =============================================
+   CAMPO DE ENDEREÇO — Painel do Carrinho
+   ============================================= */
+.cart-endereco {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin-bottom: .75rem;
+}
+.cart-endereco__label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--marrom);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.cart-endereco__label i {
+  color: var(--laranja);
+}
+.cart-endereco__opt {
+  font-weight: 400;
+  color: var(--marrom-light);
+  font-size: .78rem;
+}
+.cart-endereco__input {
+  width: 100%;
+  border: 1.5px solid #e6c98a;
+  border-radius: 10px;
+  padding: .55rem .75rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: .85rem;
+  color: var(--marrom);
+  background: #fffdf7;
+  resize: vertical;
+  min-height: 54px;
+  transition: border-color var(--t), box-shadow var(--t);
+  line-height: 1.45;
+}
+.cart-endereco__input::placeholder {
+  color: #c0a37a;
+}
+.cart-endereco__input:focus {
+  outline: none;
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 3px rgba(217,119,4,.12);
+}
+
+/* =============================================
+   LOCALIZAÇÃO — Horário e CTA
+   ============================================= */
+.horario__local {
+  color: var(--marrom-med);
+  flex-wrap: wrap;
+  text-align: center;
+}
+.horario__local i {
+  color: var(--laranja);
+}
+
+.cta__local {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .92rem;
+  color: var(--marrom-light);
+  margin-top: -.25rem;
+  margin-bottom: .5rem;
+}
+.cta__local i {
+  color: var(--laranja);
+  font-size: 1rem;
+}
+/* =============================================
+   CONFEITOS — Painel do Carrinho
+   ============================================= */
+.cart-confeitos {
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+.cart-confeitos__label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--marrom);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.cart-confeitos__label i {
+  color: var(--laranja);
+}
+.cart-confeitos__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.cpill-check {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--marrom-med);
+  background: var(--branco);
+  border: 1.5px solid #e6c98a;
+  border-radius: var(--r-pill);
+  padding: .28rem .7rem;
+  cursor: pointer;
+  transition: background var(--t), border-color var(--t), color var(--t);
+  user-select: none;
+}
+.cpill-check:has(input:checked) {
+  background: var(--laranja);
+  border-color: var(--laranja);
+  color: var(--branco);
+}
+.cpill-check input {
+  display: none;
+}
+
+/* =============================================
+   CARDÁPIO — Colapsável
+   ============================================= */
+.cardapio-oculto {
+  display: none;
+}
+.cardapio-oculto.aberto {
+  display: block;
+  animation: fadeUp .35s ease;
+}
+.btn--ver-cardapio {
+  margin-top: .75rem;
+}
+
+/* Confeito desabilitado (limite atingido) */
+.cpill-check--disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.confeito-count {
+  font-family: 'Fredoka One', cursive;
+  font-size: .78rem;
+  background: var(--laranja);
+  color: var(--branco);
+  border-radius: var(--r-pill);
+  padding: .05rem .45rem;
+  margin-left: .25rem;
+}
+
+/* =============================================
+   CONFEITO INLINE — por item do carrinho
+   ============================================= */
+.cart-item {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.cart-item__top {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .85rem .5rem;
+}
+.cart-item__confeito {
+  background: rgba(217,119,4,.04);
+  border-top: 1px dashed rgba(217,119,4,.22);
+  padding: .3rem .85rem .4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.cart-item__confeito-label {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  font-size: .65rem;
+  font-weight: 700;
+  color: var(--laranja);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.cart-item__confeito-label i { font-size: .72rem; }
+.confeito-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  min-width: 0;
+  flex: 1;
+}
+.confeito-pill {
+  font-size: .72rem;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+  padding: .15rem .6rem;
+  border-radius: var(--r-pill);
+  border: 1.5px solid rgba(217,119,4,.3);
+  background: var(--branco);
+  color: var(--marrom-light);
+  cursor: pointer;
+  transition: all .18s ease;
+  user-select: none;
+  line-height: 1.4;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.confeito-pill:hover {
+  border-color: var(--laranja);
+  color: var(--laranja);
+  background: rgba(217,119,4,.06);
+}
+.confeito-pill.ativo {
+  background: var(--laranja);
+  border-color: var(--laranja);
+  color: var(--branco);
+  box-shadow: 0 2px 8px rgba(217,119,4,.35);
+}
+.confeito-pill--none {
+  border-style: dashed;
+  color: #bba07a;
+}
+.confeito-pill--none.ativo {
+  background: rgba(217,119,4,.1);
+  border-color: rgba(217,119,4,.4);
+  color: var(--marrom-light);
+  box-shadow: none;
+}
+
+/* =============================================
+   CARRINHO v5 — item individual
+   ============================================= */
+.cart-item__remove {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(217,119,4,.3);
+  background: transparent;
+  color: var(--marrom-light);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--t), color var(--t), border-color var(--t);
+  line-height: 1;
+}
+.cart-item__remove:hover {
+  background: #fde8e8;
+  border-color: #e05555;
+  color: #e05555;
+}
+.cart-item__unit {
+  font-family: 'Fredoka One', cursive;
+  font-size: .72rem;
+  background: var(--laranja-light);
+  color: var(--laranja);
+  border: 1px solid rgba(217,119,4,.3);
+  border-radius: var(--r-pill);
+  padding: .05rem .4rem;
+  margin-left: .3rem;
+  vertical-align: middle;
+}
+
+/* Cart item — sem confeito (Premium) */
+.cart-item__confeito--none {
+  padding: .45rem .75rem .5rem;
+  background: #faf7f0;
+  border-top: 1px solid #f0e8d6;
+  border-radius: 0 0 12px 12px;
+}
+.cart-item__confeito--none .cart-item__confeito-label {
+  font-size: .72rem;
+  color: #b08c55;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  font-style: italic;
+}
