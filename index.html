@@ -13,6 +13,35 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Hero title: linha dos emojis compacta, sem espaço gigante */
+    .hero__title {
+      line-height: 1.08;
+    }
+    .hero__emojis {
+      display: block;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.4;
+      margin-top: .15em;
+      letter-spacing: .08em;
+    }
+
+    /* Logo hero: maior e mais impactante */
+    .hero__logo-img {
+      width: 320px;
+      height: 320px;
+    }
+    .hero__logo-ring {
+      padding: 14px;
+      box-shadow:
+        0 0 0 10px rgba(255,255,255,.88),
+        0 0 0 22px rgba(217,119,4,.28),
+        0 22px 72px rgba(217,119,4,.44);
+    }
+    @media (max-width: 860px) {
+      .hero__logo-img { width: 220px; height: 220px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -105,12 +134,11 @@
           <i class="bi bi-bicycle"></i> Somente Delivery &nbsp;•&nbsp; <i class="bi bi-heart-fill"></i> Massa artesanal
         </p>
         <h1 class="hero__title">
-          Churros<br>
-          <em>fresquinhos</em><br>
-          na sua porta!
+          Seja bem-vindo(a)<br>
+          à <em>Churros Mania!</em>✨🤎
         </h1>
         <p class="hero__desc">
-          Recheados generosamente, crocantes e entregues quentinhos na sua porta. Monte seu pedido e receba em casa!
+          É um prazer enorme abrir nossas bags de entrega para você. Nascemos com um propósito: ser o primeiro delivery especializado em churros na região, garantindo que o seu doce favorito chegue perfeito até você.
         </p>
         <div class="hero__btns">
           <a href="#cardapio" class="btn btn--primary btn--lg" onclick="abrirCardapio()">
@@ -186,7 +214,7 @@
           <article class="card" data-nome="Churros Tradicional — Doce de Leite" data-preco="10">
             <div class="card__info">
               <h4 class="card__name">Doce de Leite</h4>
-              <p class="card__desc">Churro crocante recheado com doce de leite cremoso.</p>
+              <p class="card__desc">Churros crocante recheado com doce de leite cremoso.</p>
             </div>
             <div class="card__footer">
               <span class="card__price">R$ 10</span>
@@ -225,7 +253,7 @@
           <article class="card" data-nome="Churros Gourmet — Doce de Leite" data-preco="12">
             <div class="card__info">
               <h4 class="card__name">Doce de Leite</h4>
-              <p class="card__desc">Versão gourmet com recheio reforçado e acabamento especial.</p>
+              <p class="card__desc">Versão gourmet com recheio reforçado e cobertura.</p>
             </div>
             <div class="card__footer">
               <span class="card__price">R$ 12</span>
@@ -238,7 +266,7 @@
           <article class="card" data-nome="Churros Gourmet — Chocolate" data-preco="12">
             <div class="card__info">
               <h4 class="card__name">Chocolate</h4>
-              <p class="card__desc">Recheio cremoso de chocolate com cobertura crocante.</p>
+              <p class="card__desc">Versão gourmet com recheio reforçado e cobertura.</p>
             </div>
             <div class="card__footer">
               <span class="card__price">R$ 12</span>
@@ -278,7 +306,7 @@
           <article class="card" data-nome="Churros Gourmet Especial — Nutella" data-preco="14">
             <div class="card__info">
               <h4 class="card__name">Nutella</h4>
-              <p class="card__desc">Recheado generosamente com Nutella original.</p>
+              <p class="card__desc">Recheio e cobertura com Nutella original.</p>
             </div>
             <div class="card__footer">
               <span class="card__price">R$ 14</span>
@@ -291,7 +319,7 @@
           <article class="card" data-nome="Churros Gourmet Especial — Paçoquinha" data-preco="14">
             <div class="card__info">
               <h4 class="card__name">Paçoquinha</h4>
-              <p class="card__desc">Recheio de paçoca cremosa com toque especial de amendoim.</p>
+              <p class="card__desc">Doce de leite no recheio e cobertura, com camada generosa de paçoquinha.</p>
             </div>
             <div class="card__footer">
               <span class="card__price">R$ 14</span>
@@ -305,7 +333,7 @@
             <div class="card__badge"><i class="bi bi-lightning-fill"></i> Especial</div>
             <div class="card__info">
               <h4 class="card__name">Duo</h4>
-              <p class="card__desc">Nutella por dentro, cobertura de leitinho condensado por fora.</p>
+              <p class="card__desc">Nutella por dentro, cobertura de leitinho por fora.</p>
             </div>
             <div class="card__footer">
               <span class="card__price">R$ 14</span>
@@ -332,7 +360,7 @@
             <div class="card__badge card__badge--gold"><i class="bi bi-trophy-fill"></i> Premium</div>
             <div class="card__info">
               <h4 class="card__name">Sabor Charge</h4>
-              <p class="card__desc">Inspirado no bombom Charge — chocolate com amendoim crocante.</p>
+              <p class="card__desc">Recheio de doce de leite, cobertura de chocolate, amendoim crocante e pedaços de Charge original.</p>
             </div>
             <div class="card__footer">
               <span class="card__price card__price--gold">R$ 16</span>
@@ -346,7 +374,7 @@
             <div class="card__badge card__badge--gold"><i class="bi bi-trophy-fill"></i> Premium</div>
             <div class="card__info">
               <h4 class="card__name">Sabor Prestígio</h4>
-              <p class="card__desc">Inspirado no Prestígio — chocolate intenso com creme de coco.</p>
+              <p class="card__desc">Chocolate no recheio e cobertura, camada generosa de coco ralado e pedaços de Prestígio original.</p>
             </div>
             <div class="card__footer">
               <span class="card__price card__price--gold">R$ 16</span>
@@ -409,7 +437,7 @@
           </div>
           <div class="step__num">3</div>
           <h4 class="step__title">Envie pelo WhatsApp</h4>
-          <p class="step__desc">Toque em <strong>Enviar pedido</strong>, informe seu endereço e a gente confirma disponibilidade e calcula o frete na hora.</p>
+          <p class="step__desc">Toque em <strong>enviar pedido</strong>, informe seu endereço e calculamos o frete na hora.</p>
         </div>
 
       </div>
